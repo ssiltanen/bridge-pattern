@@ -1,0 +1,57 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    
+env:
+  DOTNET_VERSION: '8.0.401'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: ./main
+
+      - uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: ./gh-pages
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Inject posts
+        working-directory: ./main
+        run: dotnet fsi inject-posts.fsx
+
+      - name: Copy files
+        run: |
+          cp ./main/index.html ./gh-pages/index.html
+          rm -r ./gh-pages/posts
+          cp -r ./main/posts ./gh-pages/posts
+
+      - name: Push to gh-pages
+        working-directory: ./gh-pages
+        run: |
+          git add -A
+          if git diff-index --quiet HEAD --; then
+            echo "No changes to push."
+          else
+            git config user.name github-actions
+            git config user.email "github-actions@.github.com"
+            git commit -m "Inject posts into index.html"
+            git push -f origin gh-pages
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
