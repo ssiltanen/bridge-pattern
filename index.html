@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Bridge Pattern Blog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #1e1e1e; /* Dark background */
+            color: #cfcfcf; /* Light text color for readability */
+        }
+        h1 {
+            text-align: center;
+            color: #cfcfcf; /* Light text color for readability */
+        }
+        .description {
+            text-align: center;
+            font-weight: bold;
+            color: #cfcfcf; /* Light text color for readability */
+        }
+        .timeline {
+            position: relative;
+            margin: 0 auto;
+            padding: 10px 0;
+            width: 80%;
+            max-width: 800px;
+            background: #2c2c2c; /* Slightly lighter dark background */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #00adb5; /* Teal line */
+            transform: translateX(-50%);
+        }
+        .timeline::after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .timeline-item:nth-child(odd) {
+            float: left;
+            text-align: right;
+            clear: both;
+        }
+        .timeline-item:nth-child(even) {
+            float: right;
+            text-align: left;
+            clear: both;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #00adb5; /* Teal circles */
+            z-index: 1;
+            transform: translateY(-50%);
+        }
+        .timeline-item:nth-child(odd)::before {
+            right: -10px;
+        }
+        .timeline-item:nth-child(even)::before {
+            left: -10px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #00adb5; /* Teal circles */
+            transform: translateY(-50%);
+        }
+        .timeline-item a {
+            color: inherit; 
+            text-decoration: none;
+            display: block;
+            height: 100%;
+        }
+        .timeline-item .content {
+            padding: 20px;
+            background: #393e46; /* Darker gray for content background */
+            border-radius: 8px;
+            position: relative;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .timeline-item .content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+        }
+        .timeline-item .content {
+            padding: 20px;
+            background: #393e46; /* Darker gray for content background */
+            border-radius: 8px;
+            position: relative;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .timeline-item .commit-message {
+            font-weight: bold;
+            margin: 0;
+            color: #eeeeee; /* Light gray for commit messages */
+        }
+        .timeline-item .commit-date {
+            font-size: 12px;
+            color: #aaaaaa; /* Subdued gray for dates */
+            margin-top: 5px;
+        }
+        .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            margin-top: 10px;
+            font-size: 12px;
+            background-color: #ff5722; /* Orange for tags */
+            color: #fff;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>The Bridge Pattern Blog</h1>
+    <p class="description">Decoupling blog posts from their implementations</p>
+    <div class="timeline">
+        <div class="timeline-item">
+          <a href="posts/lorem1.html">
+            <div class="content">
+                <p class="commit-message">Bugfix in feature X</p>
+                <p class="commit-date">2024-08-07</p>
+                <span class="tag">v1.1</span>
+            </div>
+          </a>
+        </div>
+        <div class="timeline-item">
+          <a href="posts/lorem2.html">
+            <div class="content">
+                <p class="commit-message">Implemented feature X</p>
+                <p class="commit-date">2024-08-05</p>
+            </div>
+          </a>
+        </div>
+        <div class="timeline-item">
+          <a href="posts/lorem3.html">
+            <div class="content">
+                <p class="commit-message">Added README</p>
+                <p class="commit-date">2024-08-02</p>
+                <span class="tag">v1.0</span>
+            </div>
+          </a>
+        </div>
+        <div class="timeline-item">
+          <a href="posts/lorem4.html">
+            <div class="content">
+                <p class="commit-message">Initial Commit</p>
+                <p class="commit-date">2024-08-01</p>
+            </div>
+          </a>
+        </div>
+    </div>
+</body>
+</html>
