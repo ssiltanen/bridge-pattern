@@ -36,7 +36,7 @@ Now, Jekyll would support creating the whole blog page, but I wanted to create t
 
 Using a separate branch for the Github pages created a separation between the code and the runtime. This could be thought also as if building the solution and hosting it from the other branch.
 
-The html injecting is done with an F# script (`.fsx`). F# script files do not require a project file like .NET things usually do. It can be invoked as is with F# interactive tool `dotnet fsi <file>`. The script file reads all files under `docs` and parses the [frontmatter](https://jekyllrb.com/docs/front-matter/) metadata properties for the index html. The metadata properties serve also as variables for the blog posts, which can be referenced in the text.
+The html injection is done with an F# script (`.fsx`). F# script files do not require a project file like .NET things usually do. It can be invoked as is with F# interactive tool `dotnet fsi <file>`. The script file reads all files under `docs` and parses the [frontmatter](https://jekyllrb.com/docs/front-matter/) metadata properties for the index html. The metadata properties serve also as variables for the blog posts, which can be referenced in the text.
 
 The github action checksout both branches (main and gh-pages), installs dotnet, executes the injection F# script, and commits the changed files into the gh-pages. A push to the gh-pages branch would then trigger the built-in github pages deployment where Jekyll would render the markdown files. Effectively, if nothing was changed in the gh-pages, no deployment is done.
 
