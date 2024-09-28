@@ -40,6 +40,7 @@ jobs:
           cp ./main/index.html ./gh-pages/index.html
           rm -r ./gh-pages/posts
           cp -r ./main/posts ./gh-pages/posts
+          cp ./main/_config.yml ./gh-pages/_config.yml
 
       - name: Push to gh-pages
         working-directory: ./gh-pages
