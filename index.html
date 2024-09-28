@@ -62,6 +62,15 @@
             text-align: left;
             clear: both;
         }
+        .tags {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            column-gap: 5px;
+        }
+        .timeline-item:nth-child(odd) .tags {
+            justify-content: right;
+        }
         .timeline-item::before {
             content: '';
             position: absolute;
